@@ -102,6 +102,7 @@ const eeCareers = placeNodes([
   createCareer('comp-eng', 'Computer Engineer', 'Hardware-software co-design bridge', 'outer', [makeSkill('Coding', 'hard'), makeSkill('Circuit Design', 'hard'), makeSkill('Leadership', 'medium')], ['Embedded Linux', 'Computer architecture', 'Firmware', 'Digital design tools'], ['Edge AI devices', 'Consumer electronics', 'Automotive compute', 'Robotics compute stack'], ['ECE core + OS/architecture', 'Embedded and networking', 'Cross-stack capstone', 'Systems internship'], ['Cloud/embedded cert tracks', 'Security basics'], ['Edge AI device prototype', 'RTOS scheduling benchmark', 'Hardware-acceleration demo'], ['Partition workloads', 'Profile bottlenecks', 'Optimize interfaces', 'Coordinate HW/SW teams'], 'Natural bridge role across EE, CS, robotics, and product management.', 'Outstanding startup role for full-stack hardware products.'),
   createCareer('tech-pm-ee', 'Technical Product Manager (EE)', 'Translate engineering into product strategy', 'outer', [makeSkill('Communication', 'easy'), makeSkill('Leadership', 'medium'), makeSkill('Coding', 'medium')], ['Roadmapping tools', 'Analytics dashboards', 'Prototype tools', 'Data SQL'], ['Hardware products', 'Industrial platforms', 'Robotics products', 'Energy platforms'], ['EE foundation + product coursework', 'Customer discovery practice', 'Data-driven prioritization', 'PM internship'], ['Product certs', 'Agile/Scrum training'], ['PRD for connected device', 'KPI dashboard for product usage', 'Feature-prioritization model'], ['Define specs', 'Align teams', 'Track roadmap metrics', 'Balance tradeoffs'], 'Business and UX skills create stronger product outcomes.', 'Great launchpad for founder/operator paths.'),
   createCareer('research-ee', 'Research Engineer (EE/CE)', 'Advanced R&D in emerging systems', 'outer', [makeSkill('Coding', 'hard'), makeSkill('Data Analysis', 'hard'), makeSkill('Communication', 'easy')], ['Python', 'Simulation stacks', 'Lab tools', 'Technical writing tooling'], ['Advanced semiconductors', 'Autonomy', 'Telecom research', 'Biomedical instrumentation'], ['Deep technical electives', 'Research methods', 'Publishable project', 'R&D internship/lab role'], ['Research writing workshops', 'Conference participation'], ['Replicate a research paper', 'Open-source reproducible experiments', 'Benchmark novel architecture'], ['Design experiments', 'Interpret results', 'Document methods', 'Present to stakeholders'], 'Math/statistics and computer engineering elevate impact.', 'Can spin out IP-backed deep-tech startups.'),
+  createCareer('motorsport-controls', 'Motorsport Controls Engineer', 'Race telemetry + lap-time optimization', 'outer', [makeSkill('Coding', 'hard'), makeSkill('Control Systems', 'hard'), makeSkill('Data Analysis', 'medium')], ['CAN bus tools', 'MATLAB', 'Python telemetry', 'Embedded C'], ['Formula racing teams', 'Performance engineering', 'Vehicle dynamics analytics', 'EV race systems'], ['Controls + dynamics specialization', 'Vehicle systems projects', 'Race-data analysis internships', 'Track-side testing'], ['Motorsport telemetry workshops', 'CAN diagnostics training'], ['Lap-time optimizer', 'Powertrain controls dashboard', 'Suspension data fusion model'], ['Analyze telemetry in real time', 'Tune controllers', 'Support test sessions', 'Report setup-performance tradeoffs'], 'Mechanical + computer engineering combo is highly valuable in racing contexts.', 'High potential in motorsport analytics and high-performance vehicle startups.'),
 ]);
 
 const financeCareers = placeNodes([
@@ -121,6 +122,7 @@ const financeCareers = placeNodes([
   createCareer('biz-intel', 'Business Intelligence Analyst', 'Data platforms for decision teams', 'outer', [makeSkill('Coding', 'medium'), makeSkill('Data Analysis', 'hard'), makeSkill('Communication', 'easy')], ['SQL', 'Python', 'Power BI/Tableau', 'ETL tools'], ['Revenue analytics', 'Operations intelligence', 'Marketing attribution', 'Executive reporting'], ['SQL + statistics foundation', 'Dashboard design', 'Data engineering basics', 'BI internship'], ['Cloud BI certificates', 'Data warehousing fundamentals'], ['Executive KPI cockpit', 'Cohort analysis pipeline', 'Forecast monitoring dashboard'], ['Build dashboards', 'Clean/transform data', 'Define metrics', 'Support strategic reviews'], 'CS and product knowledge make BI work more impactful.', 'Frequent launchpad for analytics consultancies and SaaS tools.'),
   createCareer('sales-eng', 'Sales Engineer (Tech)', 'Technical pre-sales and solution design', 'outer', [makeSkill('Communication', 'easy'), makeSkill('Coding', 'medium'), makeSkill('Leadership', 'medium')], ['CRM', 'Demo environments', 'API tools', 'Solution architecture docs'], ['Enterprise software', 'Industrial systems', 'Fintech platforms', 'Cloud products'], ['Technical domain depth', 'Sales process training', 'Customer discovery practice', 'Pre-sales internship'], ['Vendor solution certs', 'Demo storytelling workshops'], ['Live demo script kit', 'ROI calculator', 'POC success checklist'], ['Run demos', 'Translate requirements', 'Design solutions', 'Support account strategy'], 'Engineering background + business communication is ideal.', 'Can transition into revenue-focused startup leadership roles.'),
   createCareer('startup-op', 'Startup Operator / Founder', 'Build and scale new ventures', 'outer', [makeSkill('Leadership', 'medium'), makeSkill('Communication', 'easy'), makeSkill('Coding', 'medium'), makeSkill('Financial Modeling', 'medium')], ['No-code/prototyping tools', 'Analytics stack', 'CRM', 'Cloud basics'], ['SaaS startups', 'Marketplace ventures', 'Deep-tech commercialization', 'Agency-to-product paths'], ['Build domain expertise', 'Launch MVP quickly', 'Customer interviews', 'Iterative go-to-market experiments'], ['Incubator/accelerator programs', 'Startup finance literacy'], ['MVP with growth funnel', 'Pricing experiments', 'Monthly metrics and runway model'], ['Validate problem-solution fit', 'Acquire first users', 'Iterate product', 'Manage runway/team'], 'Any major can contribute—pair domain depth with rapid execution and sales.', 'Highest entrepreneurship upside; highest uncertainty.'),
+  createCareer('revops-lead', 'Revenue Operations Lead', 'Connect sales, marketing, and finance systems', 'outer', [makeSkill('Data Analysis', 'medium'), makeSkill('Leadership', 'medium'), makeSkill('Communication', 'easy')], ['CRM', 'BI dashboards', 'SQL', 'Automation tools'], ['SaaS revenue growth', 'Pipeline forecasting', 'Go-to-market analytics', 'Pricing operations'], ['Business analytics + ops', 'Sales funnel math', 'Automation workflows', 'RevOps internship'], ['Revenue operations certifications', 'CRM admin training'], ['Pipeline conversion model', 'Forecast accuracy tracker', 'Sales efficiency dashboard'], ['Standardize funnel definitions', 'Improve forecast quality', 'Align GTM teams', 'Automate reporting'], 'Statistics and lightweight coding drastically improve RevOps effectiveness.', 'Strong path into GTM analytics consulting and growth operations startups.'),
 ]);
 
 const biomedicalCareers = placeNodes([
@@ -140,6 +142,7 @@ const biomedicalCareers = placeNodes([
   createCareer('med-robotics', 'Medical Robotics Engineer', 'Robotics for surgery and care', 'outer', [makeSkill('Coding', 'hard'), makeSkill('Control Systems', 'hard'), makeSkill('Regulatory Affairs', 'medium')], ['ROS2', 'Control libraries', 'Embedded hardware', 'Safety documentation'], ['Surgical robotics', 'Rehab robotics', 'Automation in hospitals', 'Image-guided intervention'], ['Robotics + controls', 'Medical device standards', 'Clinical workflow immersion', 'Med robotics internship'], ['Safety and quality systems training', 'Robotics certifications'], ['Image-guided robot prototype', 'Safety envelope controller', 'Clinical-use simulation suite'], ['Integrate sensing/control', 'Validate safety constraints', 'Run simulated procedures', 'Coordinate clinicians and QA'], 'Computer engineering and human factors are key differentiators.', 'Strong medtech startup path with defensible technology.'),
   createCareer('digital-health-pm', 'Digital Health Product Manager', 'Product leadership for healthcare software', 'outer', [makeSkill('Leadership', 'medium'), makeSkill('Communication', 'easy'), makeSkill('Coding', 'medium')], ['Product analytics', 'EHR integrations', 'Roadmap tools', 'Cloud data services'], ['Patient engagement apps', 'Remote monitoring', 'Clinical workflows', 'Care operations software'], ['Biomedical/health domain + product skills', 'User research', 'Regulatory basics', 'Digital health internship'], ['Product certs', 'Healthcare interoperability courses'], ['MVP care-coordination app', 'Retention dashboard', 'Clinical outcomes tracking plan'], ['Prioritize roadmap', 'Balance clinical/user needs', 'Align engineering/compliance', 'Track outcomes metrics'], 'Business + UX + informatics significantly improve product outcomes.', 'Great founder path in telehealth and care-coordination products.'),
   createCareer('biomed-vc', 'Biomed Venture Analyst', 'Invest in therapeutics and devices', 'outer', [makeSkill('Financial Modeling', 'medium'), makeSkill('Data Analysis', 'medium'), makeSkill('Communication', 'easy')], ['Market intelligence tools', 'Excel', 'Clinical trial databases', 'Deal CRM'], ['Biotech investing', 'Health VC', 'R&D portfolio strategy', 'Venture building'], ['Biology + finance blend', 'Clinical trial interpretation', 'Valuation methods', 'VC fellowship'], ['Healthcare finance courses', 'Investment memo workshops'], ['Therapeutic landscape map', 'Clinical-risk valuation model', 'Investment memo set'], ['Evaluate science and teams', 'Build market theses', 'Assess risk-adjusted upside', 'Support portfolio companies'], 'Finance plus technical biomedical literacy is highly valuable.', 'Can evolve into healthcare-focused funds or venture studios.'),
+  createCareer('sports-biomech', 'Sports Biomechanics Engineer', 'Human performance and injury analytics', 'outer', [makeSkill('Data Analysis', 'hard'), makeSkill('Coding', 'medium'), makeSkill('Communication', 'easy')], ['Motion capture tools', 'Python/R', 'Wearable sensors', 'Visualization dashboards'], ['Athlete performance labs', 'Injury prevention programs', 'Rehab analytics', 'Sports tech products'], ['Biomechanics + statistics', 'Sensor analytics projects', 'Human performance internships', 'Applied lab studies'], ['Biomechanics certification tracks', 'Human-subjects protocol training'], ['Gait and jump mechanics dashboard', 'Injury risk classifier', 'Wearable sensor data pipeline'], ['Collect movement data', 'Build athlete models', 'Collaborate with coaches/clinicians', 'Translate findings to interventions'], 'Mechanical/biomedical + data science skills are ideal for this lane.', 'Strong startup paths in sports health and wearable performance tech.'),
 ]);
 
 function buildDomain(title, subtitle, center, careers, relatedLinks = []) {
@@ -150,24 +153,51 @@ const relatedLinksByDomain = {
   ee: [
     ['chip-design', 'fpga'], ['chip-design', 'comp-eng'], ['embedded', 'comp-eng'], ['embedded', 'automotive'],
     ['power-grid', 'renewables'], ['controls', 'robotics'], ['avionics', 'rf'], ['robotics', 'automation'],
-    ['signal-proc', 'rf'], ['tech-pm-ee', 'comp-eng'], ['research-ee', 'photonics'], ['automotive', 'controls']
+    ['signal-proc', 'rf'], ['tech-pm-ee', 'comp-eng'], ['research-ee', 'photonics'], ['automotive', 'controls'], ['motorsport-controls', 'automotive'], ['motorsport-controls', 'controls']
   ],
   finance: [
     ['fin-analyst', 'corp-strategy'], ['ib', 'pe'], ['wealth', 'vc'], ['quant', 'biz-intel'],
     ['risk', 'supply-fin'], ['fintech-pm', 'sales-eng'], ['consultant', 'corp-strategy'],
-    ['startup-op', 'vc'], ['product-marketing', 'startup-op'], ['ops-manager', 'supply-fin'], ['biz-intel', 'fintech-pm']
+    ['startup-op', 'vc'], ['product-marketing', 'startup-op'], ['ops-manager', 'supply-fin'], ['biz-intel', 'fintech-pm'], ['revops-lead', 'product-marketing'], ['revops-lead', 'ops-manager']
   ],
   biomedical: [
     ['biomed-device', 'med-robotics'], ['biomed-device', 'clinical-eng'], ['bioinformatics', 'health-data'],
     ['biostat', 'cra'], ['pharma-sci', 'reg-affairs'], ['imaging', 'neuro'], ['rehab', 'prosthetics'],
-    ['clinical-eng', 'digital-health-pm'], ['health-data', 'digital-health-pm'], ['biomed-vc', 'reg-affairs']
+    ['clinical-eng', 'digital-health-pm'], ['health-data', 'digital-health-pm'], ['biomed-vc', 'reg-affairs'], ['sports-biomech', 'rehab'], ['sports-biomech', 'health-data']
   ]
+};
+
+const averageSalaryById = {
+  'ee-core': '$118,000', 'chip-design': '$165,000', embedded: '$128,000', 'power-grid': '$122,000', rf: '$135,000',
+  controls: '$130,000', robotics: '$138,000', avionics: '$136,000', automotive: '$129,000', renewables: '$124,000',
+  'signal-proc': '$140,000', fpga: '$152,000', photonics: '$141,000', process: '$133,000', automation: '$121,000',
+  'comp-eng': '$149,000', 'tech-pm-ee': '$155,000', 'research-ee': '$143,000', 'motorsport-controls': '$132,000',
+  'fin-core': '$121,000', 'fin-analyst': '$96,000', ib: '$175,000', wealth: '$110,000', quant: '$185,000', risk: '$128,000',
+  'fintech-pm': '$162,000', 'corp-strategy': '$154,000', 'product-marketing': '$136,000', 'ops-manager': '$124,000',
+  consultant: '$148,000', vc: '$142,000', pe: '$189,000', 'supply-fin': '$120,000', 'biz-intel': '$127,000',
+  'sales-eng': '$145,000', 'startup-op': '$0-$500,000+', 'revops-lead': '$134,000',
+  'bio-core': '$112,000', 'biomed-device': '$124,000', 'clinical-eng': '$101,000', bioinformatics: '$136,000',
+  biostat: '$118,000', 'pharma-sci': '$126,000', 'reg-affairs': '$116,000', imaging: '$132,000', rehab: '$108,000',
+  tissue: '$119,000', cra: '$97,000', 'health-data': '$142,000', prosthetics: '$111,000', neuro: '$145,000',
+  'med-robotics': '$149,000', 'digital-health-pm': '$158,000', 'biomed-vc': '$151,000', 'sports-biomech': '$109,000'
+};
+
+const entrepreneurshipScoreById = {
+  'ee-core': 86, 'chip-design': 84, embedded: 83, 'power-grid': 78, rf: 74, controls: 85, robotics: 90, avionics: 76,
+  automotive: 82, renewables: 88, 'signal-proc': 81, fpga: 79, photonics: 77, process: 71, automation: 84,
+  'comp-eng': 89, 'tech-pm-ee': 87, 'research-ee': 80, 'motorsport-controls': 83,
+  'fin-core': 88, 'fin-analyst': 72, ib: 69, wealth: 80, quant: 85, risk: 73, 'fintech-pm': 93, 'corp-strategy': 79,
+  'product-marketing': 86, 'ops-manager': 78, consultant: 82, vc: 90, pe: 76, 'supply-fin': 74, 'biz-intel': 84,
+  'sales-eng': 87, 'startup-op': 97, 'revops-lead': 85,
+  'bio-core': 84, 'biomed-device': 92, 'clinical-eng': 70, bioinformatics: 86, biostat: 74, 'pharma-sci': 80,
+  'reg-affairs': 77, imaging: 85, rehab: 83, tissue: 79, cra: 62, 'health-data': 89, prosthetics: 88, neuro: 91,
+  'med-robotics': 94, 'digital-health-pm': 90, 'biomed-vc': 88, 'sports-biomech': 84
 };
 
 const domains = {
   ee: buildDomain(
     'Electrical & Computer Engineering Constellation',
-    '17+ technical pathways including motorsports, semiconductors, automation, and product leadership.',
+    '18+ technical pathways including motorsports, semiconductors, automation, and product leadership.',
     {
       id: 'ee-core', x: 50, y: 49, label: 'EE + CompE Core', blurb: 'Hardware, software, systems integration',
       skills: [makeSkill('Coding', 'hard'), makeSkill('Circuit Design', 'hard'), makeSkill('Control Systems', 'hard'), makeSkill('Communication', 'easy')],
@@ -185,7 +215,7 @@ const domains = {
   ),
   finance: buildDomain(
     'Finance + Business Career Constellation',
-    '17+ pathways from quantitative finance to strategy, operations, venture, and founder tracks.',
+    '18+ pathways from quantitative finance to strategy, operations, venture, and founder tracks.',
     {
       id: 'fin-core', x: 50, y: 49, label: 'Finance + Business Core', blurb: 'Capital, strategy, and execution',
       skills: [makeSkill('Excel', 'easy'), makeSkill('Financial Modeling', 'hard'), makeSkill('Data Analysis', 'medium'), makeSkill('Communication', 'easy')],
@@ -203,7 +233,7 @@ const domains = {
   ),
   biomedical: buildDomain(
     'Biomedical Engineering Constellation',
-    '17+ pathways across devices, clinical operations, data science, pharma, neurotech, and digital health.',
+    '18+ pathways across devices, clinical operations, data science, pharma, neurotech, and digital health.',
     {
       id: 'bio-core', x: 50, y: 49, label: 'Biomedical Core', blurb: 'Health systems, devices, and translational science',
       skills: [makeSkill('Coding', 'hard'), makeSkill('Data Analysis', 'hard'), makeSkill('Regulatory Affairs', 'medium'), makeSkill('Communication', 'easy')],
@@ -240,6 +270,8 @@ const projectList = document.getElementById('projectList');
 const workList = document.getElementById('workList');
 const addOns = document.getElementById('addOns');
 const entrepreneurship = document.getElementById('entrepreneurship');
+const avgSalary = document.getElementById('avgSalary');
+const entrepreneurshipBar = document.getElementById('entrepreneurshipBar');
 
 let activeDomain = 'ee';
 let nodesById = {};
@@ -338,6 +370,13 @@ function highlightConnections(nodeId) {
   (lineRegistry[nodeId] || []).forEach((line) => line.classList.add('active'));
 }
 
+function getTechLevel(tech) {
+  const t = tech.toLowerCase();
+  if (t.includes('c++') || t.includes('python') || t.includes('verilog') || t.includes('firmware') || t.includes('ml') || t.includes('signal')) return 'hard';
+  if (t.includes('excel') || t.includes('crm') || t.includes('dashboard') || t.includes('roadmap') || t.includes('documentation')) return 'easy';
+  return 'medium';
+}
+
 function renderList(listEl, items) {
   listEl.innerHTML = '';
   items.forEach((item) => {
@@ -376,7 +415,7 @@ function updatePanel(node) {
   techTags.innerHTML = '';
   node.tech.forEach((tech) => {
     const tag = document.createElement('span');
-    tag.className = 'tag';
+    tag.className = `tag ${getTechLevel(tech)}`;
     tag.textContent = tech;
     techTags.appendChild(tag);
   });
@@ -388,7 +427,11 @@ function updatePanel(node) {
   renderList(workList, node.dayToDay);
   addOns.textContent = node.addOns;
   entrepreneurship.textContent = node.entrepreneurship;
+  avgSalary.textContent = averageSalaryById[node.id] || 'Salary varies by region, sector, and seniority';
+  const score = entrepreneurshipScoreById[node.id] ?? 70;
+  entrepreneurshipBar.style.width = `${Math.max(0, Math.min(100, score))}%`;
 }
+
 
 panelToggle.addEventListener('click', () => {
   const isOpen = layoutRoot.classList.contains('panel-open');

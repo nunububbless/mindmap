@@ -83,6 +83,18 @@ h1 { font-size: 1rem; margin-bottom: 0.35rem; }
 h2 { font-size: 0.78rem; margin-bottom: 0.35rem; color: #9dcfff; text-transform: uppercase; letter-spacing: 0.08em; }
 #panelSubtitle { margin: 0 0 0.85rem; color: var(--muted); font-size: 0.84rem; }
 .panel-section { margin-bottom: 0.85rem; }
+
+.compact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+#avgSalary { margin: 0; color: #d8e8ff; font-size: 0.9rem; font-weight: 600; }
+.score-bar {
+  width: 100%; height: 10px; border-radius: 2px; border: 1px solid rgba(100,160,255,0.5);
+  background: rgba(10,22,40,0.8); overflow: hidden;
+}
+.score-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #44d388 0%, #f2c84b 50%, #ff4b55 100%);
+  transition: width 200ms ease;
+}
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .tag {
   border: 1px solid rgba(106, 166, 250, 0.4); border-radius: 2px; padding: 0.2rem 0.4rem; font-size: 0.75rem;
