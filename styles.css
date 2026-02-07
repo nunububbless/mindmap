@@ -42,31 +42,87 @@ select {
 }
 .stars {
   position: absolute; inset: 0;
-  background-image: radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(2px 2px at 72% 46%, rgba(170, 226, 255, 0.5), transparent), radial-gradient(1px 1px at 40% 83%, rgba(255, 255, 255, 0.4), transparent), radial-gradient(1px 1px at 88% 22%, rgba(143, 203, 255, 0.45), transparent);
+  background-image:
+    radial-gradient(2px 2px at 20% 30%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(2px 2px at 72% 46%, rgba(170, 226, 255, 0.5), transparent),
+    radial-gradient(1px 1px at 40% 83%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 88% 22%, rgba(143, 203, 255, 0.45), transparent);
 }
 .connection-layer,.node-layer { position: absolute; inset: 0; }
 .connection-layer { pointer-events: none; }
-.connection-layer line { stroke: rgba(120, 192, 255, 0.28); stroke-width: 1.05; transition: stroke 120ms ease, stroke-width 120ms ease, opacity 120ms ease; }
-.connection-layer line.center-link { stroke: rgba(150, 214, 255, 0.62); stroke-width: 1.7; opacity: 0.95; }
-.connection-layer line.cross-link { stroke-dasharray: 4 5; stroke: rgba(244, 202, 94, 0.52); }
-.connection-layer line.active { stroke: rgba(173, 226, 255, 0.95); stroke-width: 2.3; opacity: 1; }
-.connection-layer line.center-link.active { stroke: rgba(208, 240, 255, 1); stroke-width: 2.7; }
+.connection-layer line { stroke: rgba(120, 192, 255, 0.24); stroke-width: 1; transition: stroke 120ms ease, stroke-width 120ms ease, opacity 120ms ease; }
+.connection-layer line.center-link { stroke: rgba(165, 225, 255, 0.65); stroke-width: 1.65; opacity: 0.95; }
+.connection-layer line.cross-link { stroke-dasharray: 4 5; stroke: rgba(244, 202, 94, 0.5); }
+.connection-layer line.active { stroke: rgba(206, 238, 255, 0.95); stroke-width: 2.35; opacity: 1; }
+.connection-layer line.center-link.active { stroke: rgba(221, 246, 255, 1); stroke-width: 2.9; }
 .connection-layer line.cross-link.active { stroke: rgba(255, 225, 129, 0.98); }
+
 .node {
-  position: absolute; transform: translate(-50%, -50%); min-width: 112px; max-width: 145px;
-  background: linear-gradient(145deg, rgba(16, 39, 68, 0.96), rgba(8, 20, 38, 0.9));
-  border: 1px solid var(--node-border); border-radius: 2px; padding: 0.44rem; text-align: center;
-  box-shadow: 0 0 16px rgba(76, 143, 233, 0.18);
-  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease; cursor: pointer; color: inherit;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 104px;
+  max-width: 170px;
+  border: none;
+  background: transparent;
+  padding: 0.15rem 0.35rem;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.node .node-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(140, 209, 255, 0.9);
+  box-shadow: 0 0 10px rgba(119, 190, 255, 0.5);
+  background: rgba(3, 14, 32, 0.95);
+  flex: 0 0 10px;
 }
 .node strong {
-  display: block; font-family: 'Orbitron', sans-serif; font-size: 0.64rem; margin-bottom: 0.2rem;
-  letter-spacing: 0.045em; text-transform: uppercase;
+  display: inline;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffd679;
+  border: 1px solid rgba(245, 188, 78, 0.35);
+  padding: 0.16rem 0.32rem;
+  border-radius: 2px;
 }
-.node span { font-size: 0.66rem; color: var(--muted); }
-.node.center { min-width: 175px; max-width: 200px; border-color: #91ceff; }
-.node:hover,.node.active { transform: translate(-50%, -50%) scale(1.14); box-shadow: 0 0 24px rgba(132, 196, 255, 0.5); border-color: #9dd6ff; z-index: 5; }
-.node.outer { background: linear-gradient(145deg, rgba(35, 30, 62, 0.95), rgba(18, 15, 36, 0.92)); border-color: rgba(171, 122, 255, 0.72); }
+.node span {
+  display: none;
+}
+.node.center {
+  min-width: 200px;
+}
+.node.center .node-dot {
+  width: 14px;
+  height: 14px;
+  border-color: rgba(208, 243, 255, 0.95);
+}
+.node.center strong {
+  color: #bff0ff;
+  border-color: rgba(115, 203, 255, 0.55);
+}
+.node.outer strong {
+  color: #cfb6ff;
+  border-color: rgba(185, 139, 255, 0.52);
+}
+.node:hover,
+.node.active {
+  transform: translate(-50%, -50%) scale(1.14);
+  z-index: 8;
+}
+.node:hover .node-dot,
+.node.active .node-dot {
+  box-shadow: 0 0 16px rgba(185, 230, 255, 0.95);
+  border-color: #dcf4ff;
+}
+
 .panel-toggle {
   position: absolute; right: 0.75rem; top: 0.75rem; z-index: 7; border: 1px solid #5da9ff;
   background: rgba(6, 18, 35, 0.95); color: var(--text); border-radius: 2px; padding: 0.4rem 0.65rem;

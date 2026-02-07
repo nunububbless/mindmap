@@ -299,7 +299,7 @@ function renderDomain(domainKey) {
     el.className = `node ${index === 0 ? 'center' : ''} ${node.type === 'outer' ? 'outer' : ''}`.trim();
     el.style.left = `${node.x}%`;
     el.style.top = `${node.y}%`;
-    el.innerHTML = `<strong>${node.label}</strong><span>${node.blurb}</span>`;
+    el.innerHTML = `<span class="node-dot"></span><strong>${node.label}</strong><span>${node.blurb}</span>`;
 
     el.addEventListener('mouseenter', () => {
       updatePanel(node);
