@@ -48,26 +48,39 @@ function createCareer(id, label, blurb, type, skills, tech, applications, roadma
 }
 
 function placeNodes(careers) {
-  const radiusX = 36;
-  const radiusY = 33;
+  const scatterSlots = [
+    [16, 18], [31, 13], [46, 17], [63, 12], [79, 19],
+    [88, 32], [83, 48], [90, 63], [76, 74], [60, 81],
+    [44, 78], [28, 83], [14, 73], [10, 58], [12, 42],
+    [20, 31], [36, 27], [54, 28], [69, 35], [73, 52],
+    [60, 66], [42, 63], [28, 57], [24, 43]
+  ];
+
   careers.forEach((c, index) => {
-    const angle = (2 * Math.PI * index) / careers.length - Math.PI / 2;
-    c.x = 50 + radiusX * Math.cos(angle);
-    c.y = 49 + radiusY * Math.sin(angle);
+    const slot = scatterSlots[index % scatterSlots.length];
+    c.x = slot[0];
+    c.y = slot[1];
   });
   return careers;
 }
 
-function buildLinks(centerId, careers) {
+function buildLinks(centerId, careers, relatedLinks = []) {
   const links = [];
   careers.forEach((c) => links.push([centerId, c.id]));
+
   for (let i = 0; i < careers.length; i += 1) {
     const a = careers[i].id;
     const b = careers[(i + 1) % careers.length].id;
-    const c = careers[(i + 3) % careers.length].id;
+    const c = careers[(i + 4) % careers.length].id;
     links.push([a, b]);
     links.push([a, c, 'cross']);
   }
+
+  relatedLinks.forEach((pair) => {
+    const [from, to] = pair;
+    links.push([from, to, 'cross']);
+  });
+
   return links;
 }
 
@@ -129,9 +142,27 @@ const biomedicalCareers = placeNodes([
   createCareer('biomed-vc', 'Biomed Venture Analyst', 'Invest in therapeutics and devices', 'outer', [makeSkill('Financial Modeling', 'medium'), makeSkill('Data Analysis', 'medium'), makeSkill('Communication', 'easy')], ['Market intelligence tools', 'Excel', 'Clinical trial databases', 'Deal CRM'], ['Biotech investing', 'Health VC', 'R&D portfolio strategy', 'Venture building'], ['Biology + finance blend', 'Clinical trial interpretation', 'Valuation methods', 'VC fellowship'], ['Healthcare finance courses', 'Investment memo workshops'], ['Therapeutic landscape map', 'Clinical-risk valuation model', 'Investment memo set'], ['Evaluate science and teams', 'Build market theses', 'Assess risk-adjusted upside', 'Support portfolio companies'], 'Finance plus technical biomedical literacy is highly valuable.', 'Can evolve into healthcare-focused funds or venture studios.'),
 ]);
 
-function buildDomain(title, subtitle, center, careers) {
-  return { title, subtitle, center, nodes: careers, links: buildLinks(center.id, careers) };
+function buildDomain(title, subtitle, center, careers, relatedLinks = []) {
+  return { title, subtitle, center, nodes: careers, links: buildLinks(center.id, careers, relatedLinks) };
 }
+
+const relatedLinksByDomain = {
+  ee: [
+    ['chip-design', 'fpga'], ['chip-design', 'comp-eng'], ['embedded', 'comp-eng'], ['embedded', 'automotive'],
+    ['power-grid', 'renewables'], ['controls', 'robotics'], ['avionics', 'rf'], ['robotics', 'automation'],
+    ['signal-proc', 'rf'], ['tech-pm-ee', 'comp-eng'], ['research-ee', 'photonics'], ['automotive', 'controls']
+  ],
+  finance: [
+    ['fin-analyst', 'corp-strategy'], ['ib', 'pe'], ['wealth', 'vc'], ['quant', 'biz-intel'],
+    ['risk', 'supply-fin'], ['fintech-pm', 'sales-eng'], ['consultant', 'corp-strategy'],
+    ['startup-op', 'vc'], ['product-marketing', 'startup-op'], ['ops-manager', 'supply-fin'], ['biz-intel', 'fintech-pm']
+  ],
+  biomedical: [
+    ['biomed-device', 'med-robotics'], ['biomed-device', 'clinical-eng'], ['bioinformatics', 'health-data'],
+    ['biostat', 'cra'], ['pharma-sci', 'reg-affairs'], ['imaging', 'neuro'], ['rehab', 'prosthetics'],
+    ['clinical-eng', 'digital-health-pm'], ['health-data', 'digital-health-pm'], ['biomed-vc', 'reg-affairs']
+  ]
+};
 
 const domains = {
   ee: buildDomain(
@@ -149,7 +180,8 @@ const domains = {
       addOns: 'Computer engineering, CS, business, and policy each unlock additional career lanes.',
       entrepreneurship: 'High startup potential across chips, robotics, power software, and connected-device platforms.'
     },
-    eeCareers
+    eeCareers,
+    relatedLinksByDomain.ee
   ),
   finance: buildDomain(
     'Finance + Business Career Constellation',
@@ -166,7 +198,8 @@ const domains = {
       addOns: 'Pair with engineering/CS for technical sectors; pair with operations/design for GTM and growth.',
       entrepreneurship: 'Strong paths to advisory firms, analytics products, fintech ventures, and acquisition entrepreneurship.'
     },
-    financeCareers
+    financeCareers,
+    relatedLinksByDomain.finance
   ),
   biomedical: buildDomain(
     'Biomedical Engineering Constellation',
@@ -183,7 +216,8 @@ const domains = {
       addOns: 'EE/computer engineering boosts device paths; business/finance boosts commercialization.',
       entrepreneurship: 'Exceptional potential in med-device, digital therapeutics, and health analytics startups.'
     },
-    biomedicalCareers
+    biomedicalCareers,
+    relatedLinksByDomain.biomedical
   )
 };
 
@@ -209,6 +243,8 @@ const entrepreneurship = document.getElementById('entrepreneurship');
 
 let activeDomain = 'ee';
 let nodesById = {};
+let activeNodeId = null;
+let lineRegistry = {};
 
 function openPanel() {
   layoutRoot.classList.add('panel-open');
@@ -233,12 +269,20 @@ function renderDomain(domainKey) {
     el.style.top = `${node.y}%`;
     el.innerHTML = `<strong>${node.label}</strong><span>${node.blurb}</span>`;
 
-    el.addEventListener('mouseenter', () => updatePanel(node));
+    el.addEventListener('mouseenter', () => {
+      updatePanel(node);
+      highlightConnections(node.id);
+    });
+    el.addEventListener('mouseleave', () => {
+      if (activeNodeId) highlightConnections(activeNodeId);
+    });
     el.addEventListener('click', () => {
       document.querySelectorAll('.node').forEach((n) => n.classList.remove('active'));
       el.classList.add('active');
+      activeNodeId = node.id;
       openPanel();
       updatePanel(node);
+      highlightConnections(node.id);
       requestAnimationFrame(() => drawConnections(data.links));
     });
 
@@ -249,12 +293,15 @@ function renderDomain(domainKey) {
   requestAnimationFrame(() => {
     drawConnections(data.links);
     updatePanel(data.center);
+    activeNodeId = data.center.id;
     nodesById[data.center.id]?.el.classList.add('active');
+    highlightConnections(activeNodeId);
   });
 }
 
 function drawConnections(links) {
   connectionLayer.innerHTML = '';
+  lineRegistry = {};
   const stageRect = stage.getBoundingClientRect();
 
   links.forEach(([fromId, toId, type]) => {
@@ -270,9 +317,23 @@ function drawConnections(links) {
     line.setAttribute('y1', a.top + a.height / 2 - stageRect.top);
     line.setAttribute('x2', b.left + b.width / 2 - stageRect.left);
     line.setAttribute('y2', b.top + b.height / 2 - stageRect.top);
+    line.dataset.from = fromId;
+    line.dataset.to = toId;
     if (type === 'cross') line.classList.add('cross-link');
     connectionLayer.appendChild(line);
+
+    if (!lineRegistry[fromId]) lineRegistry[fromId] = [];
+    if (!lineRegistry[toId]) lineRegistry[toId] = [];
+    lineRegistry[fromId].push(line);
+    lineRegistry[toId].push(line);
   });
+
+  if (activeNodeId) highlightConnections(activeNodeId);
+}
+
+function highlightConnections(nodeId) {
+  connectionLayer.querySelectorAll('line').forEach((line) => line.classList.remove('active'));
+  (lineRegistry[nodeId] || []).forEach((line) => line.classList.add('active'));
 }
 
 function renderList(listEl, items) {

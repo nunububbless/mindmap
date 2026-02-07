@@ -46,8 +46,10 @@ select {
 }
 .connection-layer,.node-layer { position: absolute; inset: 0; }
 .connection-layer { pointer-events: none; }
-.connection-layer line { stroke: rgba(120, 192, 255, 0.34); stroke-width: 1.1; }
-.connection-layer line.cross-link { stroke-dasharray: 4 5; stroke: rgba(244, 202, 94, 0.64); }
+.connection-layer line { stroke: rgba(120, 192, 255, 0.28); stroke-width: 1.05; transition: stroke 120ms ease, stroke-width 120ms ease, opacity 120ms ease; }
+.connection-layer line.cross-link { stroke-dasharray: 4 5; stroke: rgba(244, 202, 94, 0.52); }
+.connection-layer line.active { stroke: rgba(173, 226, 255, 0.95); stroke-width: 2.3; opacity: 1; }
+.connection-layer line.cross-link.active { stroke: rgba(255, 225, 129, 0.98); }
 .node {
   position: absolute; transform: translate(-50%, -50%); min-width: 112px; max-width: 145px;
   background: linear-gradient(145deg, rgba(16, 39, 68, 0.96), rgba(8, 20, 38, 0.9));
