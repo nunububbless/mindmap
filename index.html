@@ -18,7 +18,7 @@
         <label for="domainSelect">Career Domain</label>
         <select id="domainSelect" aria-label="Select domain">
           <option value="ee">Electrical Engineering</option>
-          <option value="finance">Finance</option>
+          <option value="finance">Finance + Business</option>
           <option value="biomedical">Biomedical Engineering</option>
         </select>
       </header>
@@ -33,11 +33,12 @@
 
         <aside class="insight-panel" id="insightPanel">
           <h1 id="panelTitle">Electrical Engineering</h1>
-          <p id="panelSubtitle">Hover or select a node to inspect required skills and applications.</p>
+          <p id="panelSubtitle">Click any node for deep requirements, skills, pathways, and cross-major options.</p>
 
           <div class="panel-section">
-            <h2>Key Skills</h2>
+            <h2>Key Skills (click to learn)</h2>
             <div id="skillTags" class="tags"></div>
+            <div id="skillDetail" class="skill-detail">Click a skill tag to view what it means and how to build it.</div>
           </div>
 
           <div class="panel-section">
@@ -53,6 +54,16 @@
           <div class="panel-section">
             <h2>Training Roadmap</h2>
             <ul id="roadmapList"></ul>
+          </div>
+
+          <div class="panel-section">
+            <h2>Certifications / Credentials</h2>
+            <ul id="credentialList"></ul>
+          </div>
+
+          <div class="panel-section">
+            <h2>Portfolio Projects to Build</h2>
+            <ul id="projectList"></ul>
           </div>
 
           <div class="panel-section">
