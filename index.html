@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Future Career Constellation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-controls">
+        <label for="domainSelect">Career Domain</label>
+        <select id="domainSelect" aria-label="Select domain">
+          <option value="ee">Electrical Engineering</option>
+          <option value="finance">Finance</option>
+          <option value="biomedical">Biomedical Engineering</option>
+        </select>
+      </header>
+
+      <main class="layout panel-open" id="layoutRoot">
+        <section class="mindmap-stage" id="mindmapStage">
+          <div class="stars"></div>
+          <svg id="connectionLayer" class="connection-layer" aria-hidden="true"></svg>
+          <div id="nodeLayer" class="node-layer"></div>
+          <button id="panelToggle" class="panel-toggle" type="button" aria-expanded="true">Hide details</button>
+        </section>
+
+        <aside class="insight-panel" id="insightPanel">
+          <h1 id="panelTitle">Electrical Engineering</h1>
+          <p id="panelSubtitle">Hover or select a node to inspect required skills and applications.</p>
+
+          <div class="panel-section">
+            <h2>Key Skills</h2>
+            <div id="skillTags" class="tags"></div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Industry Applications</h2>
+            <ul id="applicationList"></ul>
+          </div>
+
+          <div class="panel-section">
+            <h2>Technical Stack</h2>
+            <div id="techTags" class="tags"></div>
+          </div>
+
+          <div class="panel-section">
+            <h2>Training Roadmap</h2>
+            <ul id="roadmapList"></ul>
+          </div>
+
+          <div class="panel-section">
+            <h2>Day-to-Day Work</h2>
+            <ul id="workList"></ul>
+          </div>
+
+          <div class="panel-section">
+            <h2>Cross-Major Add-ons</h2>
+            <p id="addOns"></p>
+          </div>
+
+          <div class="panel-section">
+            <h2>Entrepreneurship Potential</h2>
+            <p id="entrepreneurship"></p>
+          </div>
+        </aside>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
