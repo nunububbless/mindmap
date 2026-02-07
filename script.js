@@ -303,6 +303,7 @@ function drawConnections(links) {
   connectionLayer.innerHTML = '';
   lineRegistry = {};
   const stageRect = stage.getBoundingClientRect();
+  const centerId = domains[activeDomain].center.id;
 
   links.forEach(([fromId, toId, type]) => {
     const from = nodesById[fromId];
@@ -319,6 +320,7 @@ function drawConnections(links) {
     line.setAttribute('y2', b.top + b.height / 2 - stageRect.top);
     line.dataset.from = fromId;
     line.dataset.to = toId;
+    if (fromId === centerId || toId === centerId) line.classList.add('center-link');
     if (type === 'cross') line.classList.add('cross-link');
     connectionLayer.appendChild(line);
 
