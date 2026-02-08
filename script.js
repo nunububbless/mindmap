@@ -56,10 +56,24 @@ function placeNodes(careers) {
     [60, 66], [42, 63], [28, 57], [24, 43]
   ];
 
-  careers.forEach((c, index) => {
-    const slot = scatterSlots[index % scatterSlots.length];
-    c.x = slot[0];
-    c.y = slot[1];
+  if (careers.length <= scatterSlots.length) {
+    careers.forEach((c, index) => {
+      const slot = scatterSlots[index % scatterSlots.length];
+      c.x = slot[0];
+      c.y = slot[1];
+    });
+    return careers;
+  }
+
+  careers.forEach((career, index) => {
+    const ring = Math.floor(index / 18);
+    const indexInRing = index % 18;
+    const angle = (2 * Math.PI * indexInRing) / 18 + (ring * 0.33);
+    const rx = 22 + ring * 9;
+    const ry = 17 + ring * 7;
+    const jitter = ((index % 3) - 1) * 1.8;
+    career.x = Math.max(6, Math.min(94, 50 + (rx + jitter) * Math.cos(angle)));
+    career.y = Math.max(8, Math.min(92, 49 + (ry + jitter) * Math.sin(angle)));
   });
   return careers;
 }
@@ -147,6 +161,99 @@ const biomedicalCareers = placeNodes([
 
 function buildDomain(title, subtitle, center, careers, relatedLinks = []) {
   return { title, subtitle, center, nodes: careers, links: buildLinks(center.id, careers, relatedLinks) };
+}
+
+
+function slugify(value) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function buildPopular2026Domain() {
+  const categoryDefinitions = [
+    { key: 'engineering', label: 'Engineering', skills: ['Coding', 'Circuit Design', 'Data Analysis'], tech: ['CAD', 'Python', 'Simulation tools'], careers: ['AI Hardware Engineer', 'Renewable Energy Engineer', 'Robotics Systems Engineer', 'Civil Infrastructure Engineer', 'Aerospace Systems Engineer', 'Automotive EV Engineer', 'Manufacturing Engineer', 'Industrial Automation Engineer'] },
+    { key: 'comp-sci', label: 'Computer Science', skills: ['Coding', 'Data Analysis', 'Leadership'], tech: ['Python', 'Cloud', 'SQL'], careers: ['Machine Learning Engineer', 'Data Engineer', 'Cybersecurity Analyst', 'Cloud Architect', 'Software Engineer', 'DevOps Engineer', 'Site Reliability Engineer', 'Blockchain Developer', 'AR/VR Engineer'] },
+    { key: 'business', label: 'Business & Finance', skills: ['Financial Modeling', 'Communication', 'Leadership'], tech: ['Excel', 'BI dashboards', 'CRM'], careers: ['Product Manager', 'Investment Analyst', 'Business Operations Manager', 'Management Consultant', 'Marketing Strategist', 'Financial Planner', 'Revenue Operations Lead', 'Supply Chain Strategist'] },
+    { key: 'science', label: 'Science & Research', skills: ['Data Analysis', 'Communication', 'Coding'], tech: ['Lab tools', 'Python', 'Statistical software'], careers: ['Biotech Research Scientist', 'Climate Scientist', 'Materials Scientist', 'Computational Chemist', 'Neuroscience Researcher', 'Geospatial Analyst', 'Astrophysics Data Scientist', 'Food Science Specialist'] },
+    { key: 'healthcare', label: 'Healthcare', skills: ['Communication', 'Regulatory Affairs', 'Data Analysis'], tech: ['EHR systems', 'Imaging tools', 'Clinical data platforms'], careers: ['Nurse Practitioner', 'Physician Assistant', 'Clinical Data Manager', 'Healthcare Administrator', 'Medical Device Engineer', 'Telemedicine Product Lead', 'Genetic Counselor', 'Public Health Analyst'] },
+    { key: 'education', label: 'Teaching & Education', skills: ['Communication', 'Leadership', 'Data Analysis'], tech: ['LMS platforms', 'Content tools', 'Analytics dashboards'], careers: ['STEM Teacher', 'Instructional Designer', 'Education Technology Specialist', 'Curriculum Architect', 'Academic Advisor', 'School Data Coordinator', 'Career Counselor'] },
+    { key: 'government', label: 'Government & Politics', skills: ['Communication', 'Leadership', 'Data Analysis'], tech: ['Policy databases', 'GIS', 'Research tools'], careers: ['Policy Analyst', 'Urban Planner', 'Legislative Aide', 'Diplomatic Officer', 'Intelligence Analyst', 'Campaign Data Strategist', 'Public Affairs Specialist'] },
+    { key: 'legal', label: 'Legal & Policy', skills: ['Communication', 'Leadership', 'Regulatory Affairs'], tech: ['Legal research tools', 'Document systems', 'Analytics'], careers: ['Corporate Attorney', 'IP Lawyer', 'Compliance Officer', 'Regulatory Counsel', 'Privacy Specialist', 'Labor Relations Advisor'] },
+    { key: 'creative', label: 'Creative & Media', skills: ['Communication', 'Leadership', 'Coding'], tech: ['Design tools', 'Analytics', 'Content platforms'], careers: ['UX Designer', 'Technical Writer', 'Digital Producer', 'Game Designer', 'Brand Strategist', 'Motion Graphics Artist', 'Creative Technologist'] },
+    { key: 'trades', label: 'Skilled Trades & Ops', skills: ['Leadership', 'Communication', 'Data Analysis'], tech: ['Field diagnostics', 'ERP', 'Automation tools'], careers: ['Electrician', 'HVAC Technician', 'Solar Installer', 'Construction Manager', 'Logistics Coordinator', 'Field Service Engineer', 'Quality Assurance Specialist'] }
+  ];
+
+  const categoryNodes = [];
+  const careerNodes = [];
+  const links = [];
+  const centerId = 'popular-2026-core';
+
+  categoryDefinitions.forEach((cat, catIndex) => {
+    const categoryId = `cat-${cat.key}`;
+    categoryNodes.push(createCareer(
+      categoryId,
+      cat.label,
+      `${cat.careers.length} high-demand 2026 careers`,
+      'outer',
+      cat.skills.map((k) => makeSkill(k, k === 'Communication' ? 'easy' : k === 'Leadership' ? 'medium' : 'hard')),
+      cat.tech,
+      ['Category overview', 'Cross-major opportunities', 'Job market demand'],
+      ['Build foundations', 'Develop portfolio', 'Gain internship/apprenticeship', 'Specialize by sector'],
+      ['Role-specific certifications', 'Portfolio evidence', 'Professional networking'],
+      ['One capstone in this category', 'One collaborative project', 'One practical industry case study'],
+      ['Research openings', 'Build capabilities', 'Apply and iterate', 'Develop specialization depth'],
+      'Combine this category with a secondary major/minor for higher resilience.',
+      'Many careers here support startup or independent-practice pathways.'
+    ));
+    links.push([centerId, categoryId]);
+
+    cat.careers.forEach((careerName) => {
+      const id = `c26-${slugify(careerName)}`;
+      careerNodes.push(createCareer(
+        id,
+        careerName,
+        `${cat.label} pathway`,
+        '',
+        [makeSkill('Coding', 'hard'), makeSkill('Data Analysis', 'medium'), makeSkill('Communication', 'easy')],
+        cat.tech,
+        ['High-growth hiring market', 'Cross-functional collaboration', 'Global applicability'],
+        ['Degree or training route', 'Hands-on projects', 'Internship/apprenticeship', 'Interview readiness'],
+        ['Certifications where relevant', 'Evidence of outcomes', 'Professional references'],
+        ['Portfolio project 1', 'Portfolio project 2', 'Measured impact summary'],
+        ['Execution and problem solving', 'Stakeholder communication', 'Continuous learning and adaptation'],
+        `Primary track: ${cat.label}. Helpful add-ons: analytics, communication, leadership, and domain tools.`,
+        'Entrepreneurship potential varies by niche but generally strong with execution and market insight.'
+      ));
+      links.push([categoryId, id]);
+      if (catIndex > 0) links.push([id, `cat-${categoryDefinitions[catIndex - 1].key}`, 'cross']);
+    });
+  });
+
+  placeNodes(categoryNodes);
+  placeNodes(careerNodes);
+
+  const allNodes = [...categoryNodes, ...careerNodes];
+  return {
+    title: 'Top Careers in 2026 (Grouped by Category)',
+    subtitle: '75 popular careers mapped across science, engineering, business, computing, policy, education, and more.',
+    center: {
+      id: centerId,
+      x: 50,
+      y: 49,
+      label: 'Top Careers 2026',
+      blurb: 'Category-first career map',
+      skills: [makeSkill('Communication', 'easy'), makeSkill('Data Analysis', 'medium'), makeSkill('Coding', 'hard')],
+      tech: ['Research tools', 'Analytics', 'Portfolio platforms'],
+      applications: ['Career exploration', 'Major planning', 'Skill pathway mapping', 'Cross-domain planning'],
+      roadmap: ['Pick 1-2 categories', 'Build skills + projects', 'Validate with internships', 'Refine toward target role'],
+      credentials: ['Role-relevant credentials', 'Portfolio proof', 'Mentorship and networking'],
+      projects: ['Category capstone', 'Team project', 'Applied real-world case'],
+      dayToDay: ['Compare options', 'Prioritize skills', 'Execute learning plan', 'Track progress and outcomes'],
+      addOns: 'Mix majors strategically (e.g., engineering + business, science + policy, CS + healthcare).',
+      entrepreneurship: 'Multiple routes to startup, advisory, agency, or independent practice models.'
+    },
+    nodes: allNodes,
+    links
+  };
 }
 
 const relatedLinksByDomain = {
@@ -248,7 +355,8 @@ const domains = {
     },
     biomedicalCareers,
     relatedLinksByDomain.biomedical
-  )
+  ),
+  popular2026: buildPopular2026Domain()
 };
 
 const stage = document.getElementById('mindmapStage');
@@ -427,7 +535,8 @@ function updatePanel(node) {
   renderList(workList, node.dayToDay);
   addOns.textContent = node.addOns;
   entrepreneurship.textContent = node.entrepreneurship;
-  avgSalary.textContent = averageSalaryById[node.id] || 'Salary varies by region, sector, and seniority';
+  const salaryFallback = node.id.startsWith('c26-') ? '$95,000 (varies by role/region)' : node.id.startsWith('cat-') ? '$110,000 (category average estimate)' : 'Salary varies by region, sector, and seniority';
+  avgSalary.textContent = averageSalaryById[node.id] || salaryFallback;
   const score = entrepreneurshipScoreById[node.id] ?? 70;
   entrepreneurshipBar.style.width = `${Math.max(0, Math.min(100, score))}%`;
 }
