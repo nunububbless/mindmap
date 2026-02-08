@@ -151,6 +151,8 @@ h2 { font-size: 0.78rem; margin-bottom: 0.35rem; color: #9dcfff; text-transform:
   background: linear-gradient(90deg, #44d388 0%, #f2c84b 50%, #ff4b55 100%);
   transition: width 200ms ease;
 }
+
+.score-text { margin: 0.35rem 0 0; color: #cde4ff; font-size: 0.78rem; }
 .tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
 .tag {
   border: 1px solid rgba(106, 166, 250, 0.4); border-radius: 2px; padding: 0.2rem 0.4rem; font-size: 0.75rem;

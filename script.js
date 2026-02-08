@@ -182,6 +182,15 @@ function buildPopular2026Domain() {
     { key: 'trades', label: 'Skilled Trades & Ops', skills: ['Leadership', 'Communication', 'Data Analysis'], tech: ['Field diagnostics', 'ERP', 'Automation tools'], careers: ['Electrician', 'HVAC Technician', 'Solar Installer', 'Construction Manager', 'Logistics Coordinator', 'Field Service Engineer', 'Quality Assurance Specialist'] }
   ];
 
+  const categorySalary = {
+    engineering: '$128,000', 'comp-sci': '$142,000', business: '$124,000', science: '$118,000', healthcare: '$116,000',
+    education: '$78,000', government: '$95,000', legal: '$154,000', creative: '$92,000', trades: '$88,000'
+  };
+  const categoryScore = {
+    engineering: 84, 'comp-sci': 89, business: 86, science: 78, healthcare: 82,
+    education: 68, government: 63, legal: 72, creative: 80, trades: 74
+  };
+
   const categoryNodes = [];
   const careerNodes = [];
   const links = [];
@@ -189,7 +198,7 @@ function buildPopular2026Domain() {
 
   categoryDefinitions.forEach((cat, catIndex) => {
     const categoryId = `cat-${cat.key}`;
-    categoryNodes.push(createCareer(
+    const categoryNode = createCareer(
       categoryId,
       cat.label,
       `${cat.careers.length} high-demand 2026 careers`,
@@ -203,12 +212,15 @@ function buildPopular2026Domain() {
       ['Research openings', 'Build capabilities', 'Apply and iterate', 'Develop specialization depth'],
       'Combine this category with a secondary major/minor for higher resilience.',
       'Many careers here support startup or independent-practice pathways.'
-    ));
+    );
+    categoryNode.avgSalary = categorySalary[cat.key] || '$110,000';
+    categoryNode.entrepreneurshipScore = categoryScore[cat.key] ?? 70;
+    categoryNodes.push(categoryNode);
     links.push([centerId, categoryId]);
 
     cat.careers.forEach((careerName) => {
       const id = `c26-${slugify(careerName)}`;
-      careerNodes.push(createCareer(
+      const careerNode = createCareer(
         id,
         careerName,
         `${cat.label} pathway`,
@@ -222,7 +234,10 @@ function buildPopular2026Domain() {
         ['Execution and problem solving', 'Stakeholder communication', 'Continuous learning and adaptation'],
         `Primary track: ${cat.label}. Helpful add-ons: analytics, communication, leadership, and domain tools.`,
         'Entrepreneurship potential varies by niche but generally strong with execution and market insight.'
-      ));
+      );
+      careerNode.avgSalary = categorySalary[cat.key] || '$95,000';
+      careerNode.entrepreneurshipScore = Math.max(50, Math.min(96, (categoryScore[cat.key] ?? 70) + ((careerName.length % 7) - 3)));
+      careerNodes.push(careerNode);
       links.push([categoryId, id]);
       if (catIndex > 0) links.push([id, `cat-${categoryDefinitions[catIndex - 1].key}`, 'cross']);
     });
@@ -249,7 +264,9 @@ function buildPopular2026Domain() {
       projects: ['Category capstone', 'Team project', 'Applied real-world case'],
       dayToDay: ['Compare options', 'Prioritize skills', 'Execute learning plan', 'Track progress and outcomes'],
       addOns: 'Mix majors strategically (e.g., engineering + business, science + policy, CS + healthcare).',
-      entrepreneurship: 'Multiple routes to startup, advisory, agency, or independent practice models.'
+      entrepreneurship: 'Multiple routes to startup, advisory, agency, or independent practice models.',
+      avgSalary: '$112,000 (cross-category blended estimate)',
+      entrepreneurshipScore: 82
     },
     nodes: allNodes,
     links
@@ -380,6 +397,7 @@ const addOns = document.getElementById('addOns');
 const entrepreneurship = document.getElementById('entrepreneurship');
 const avgSalary = document.getElementById('avgSalary');
 const entrepreneurshipBar = document.getElementById('entrepreneurshipBar');
+const entrepreneurshipScoreText = document.getElementById('entrepreneurshipScoreText');
 
 let activeDomain = 'ee';
 let nodesById = {};
@@ -536,9 +554,10 @@ function updatePanel(node) {
   addOns.textContent = node.addOns;
   entrepreneurship.textContent = node.entrepreneurship;
   const salaryFallback = node.id.startsWith('c26-') ? '$95,000 (varies by role/region)' : node.id.startsWith('cat-') ? '$110,000 (category average estimate)' : 'Salary varies by region, sector, and seniority';
-  avgSalary.textContent = averageSalaryById[node.id] || salaryFallback;
-  const score = entrepreneurshipScoreById[node.id] ?? 70;
+  avgSalary.textContent = node.avgSalary || averageSalaryById[node.id] || salaryFallback;
+  const score = node.entrepreneurshipScore ?? entrepreneurshipScoreById[node.id] ?? 70;
   entrepreneurshipBar.style.width = `${Math.max(0, Math.min(100, score))}%`;
+  entrepreneurshipScoreText.textContent = `Score: ${Math.round(score)}/100`;
 }
 
 
